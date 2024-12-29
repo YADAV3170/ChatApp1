@@ -42,9 +42,14 @@ export const sendMessage = async (req, res) => {
     const senderId = req.user._id;
 
     let imageUrl;
+    const image1=cloudinary.image(image, {transformation: [
+       {width: 1000, crop: "scale"},
+        {quality: "auto"},
+        {fetch_format: "auto"}
+        ]});
     if (image) {
       // Upload base64 image to cloudinary
-      const uploadResponse = await cloudinary.uploader.upload(image);
+      const uploadResponse = await cloudinary.uploader.upload(image1);
       imageUrl = uploadResponse.secure_url;
     }
 
